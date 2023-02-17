@@ -1,0 +1,32 @@
+{
+  "name": "com.lulasz.superfsm",
+  "version": "1.0.0",
+  "displayName": "SuperFSM",
+  "description": "Compact Finite State Machine",
+  "keywords": [
+    "FSM",
+    "finite",
+    "state",
+    "machine",
+    "tools",
+    "extensions"
+  ],
+  "author": {
+    "name": "Łukasz Majewski",
+    "email": "lukasz_majewski@outlook.com",
+    "url": "https://github.com/lulasz"
+  },
+  "unity": "2021.3",
+  "samples": [
+    {
+      "displayName": "Basic FSM",
+      "description": "Contains the basic FSM example",
+      "path": "Samples~/Basic FSM"
+    },
+    {
+      "displayName": "Player Movement FSM",
+      "description": "Contains more advanced FSM for player controll",
+      "path": "Samples~/Player Movement FSM"
+    }
+  ]
+}
