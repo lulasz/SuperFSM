@@ -9,14 +9,14 @@ public class Example : MonoBehaviour
 {
     private void Start() // You need to set it only once, nothing on Unity's Update etc
     {
-        FSM _fsm = new FSM(this); // You need to pass this MonoBehaviour
+        FSM<string> _fsm = new FSM<string>(this); // You need to pass this MonoBehaviour
 
         _fsm.AddState("STATE 1",
         OnUpdate: () => // You can set some functions on Entry, Update and Exit of a state
         {
             // DO STUFF ON LOOP
         })
-        .AddTransition("CHANGE TO 2", "STATE 2", // Transitions check constantly if they can transition to another state
+        .AddTransition(to: "STATE 2", // Transitions check constantly if they can transition to another state
         Condition: () =>
         {
             return true;
