@@ -1,6 +1,6 @@
 {
   "name": "com.lulasz.superfsm",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "displayName": "SuperFSM",
   "description": "Compact Finite State Machine",
   "keywords": [
@@ -24,9 +24,9 @@
       "path": "Samples~/Basic FSM"
     },
     {
-      "displayName": "Player Movement FSM",
-      "description": "Contains more advanced FSM for player controll",
-      "path": "Samples~/Player Movement FSM"
+      "displayName": "NPC FSM",
+      "description": "Contains more advanced FSM for NPC controll",
+      "path": "Samples~/NPC FSM"
     }
   ]
 }
