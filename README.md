@@ -1,5 +1,5 @@
 ## SuperFSM
-Is a compact form of a Finite State Machine for Unity3D
+Is a compact form of a generic Finite State Machine for Unity3D
 
 ### Usage
 ```C#
