@@ -1,20 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using SuperFSM;
+using Lulasz.SuperFSM;
 
 public class SuperFSMExample : MonoBehaviour
 {
     private void Start()
     {
-        FSM _fsm = new FSM(this);
+        FSM<string> _fsm = new FSM<string>(this);
 
         _fsm.AddState("state 1",
         OnUpdate: () =>
         {
-            Debug.Log($"{_fsm.CurrentState.Name} : update");
+            Debug.Log($"{_fsm.CurrentState.ID} : update");
         })
-        .AddTransition("can change to 2", "state 2",
+        .AddTransition(to: "state 2",
         Condition: () =>
         {
             return true;
@@ -23,11 +21,11 @@ public class SuperFSMExample : MonoBehaviour
         _fsm.AddState("state 2",
         OnEntry: () =>
         {
-            Debug.Log($"{_fsm.CurrentState.Name} : entered");
+            Debug.Log($"{_fsm.CurrentState.ID} : entered");
         });
 
         _fsm.SetState("state 1");
-        _fsm.Start();
+        _fsm.Start(Time.deltaTime);
     }
 
 }
