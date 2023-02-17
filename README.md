@@ -29,7 +29,7 @@ public class Example : MonoBehaviour
         });
 
         _fsm.SetState("STATE 1"); // You need to select the first state
-        _fsm.Start(); // You need to start it at the end. Adding more states after starting is not recommended, but should work
+        _fsm.Start(Time.deltaTime); // You need to start it at the end with time delay execution, basically put Time.deltaTime or Time.unscaledDeltaTime
     }
 
 }
