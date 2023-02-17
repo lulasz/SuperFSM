@@ -11,6 +11,13 @@
     "tools",
     "extensions"
   ],
+  "documentationUrl": "https://github.com/lulasz/superfsm/",
+  "changelogUrl": "https://github.com/lulasz/superfsm/",
+  "licensesUrl": "https://github.com/lulasz/superfsm/",
+  "bugs": {
+    "email": "lukasz_majewski@outlook.com",
+    "url": "https://github.com/lulasz/superfsm/issues"
+  },
   "author": {
     "name": "Łukasz Majewski",
     "email": "lukasz_majewski@outlook.com",
