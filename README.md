@@ -1,5 +1,5 @@
 ## SuperFSM
-Is a compact form of a Finite State Machine for Unity3D
+Is a compact form of a generic Finite State Machine for Unity3D
 
 ### Usage
 ```C#
@@ -9,14 +9,14 @@ public class Example : MonoBehaviour
 {
     private void Start() // You need to set it only once, nothing on Unity's Update etc
     {
-        FSM _fsm = new FSM(this); // You need to pass this MonoBehaviour
+        FSM<string> _fsm = new FSM<string>(this); // You need to pass this MonoBehaviour
 
         _fsm.AddState("STATE 1",
         OnUpdate: () => // You can set some functions on Entry, Update and Exit of a state
         {
             // DO STUFF ON LOOP
         })
-        .AddTransition("CHANGE TO 2", "STATE 2", // Transitions check constantly if they can transition to another state
+        .AddTransition(to: "STATE 2", // Transitions check constantly if they can transition to another state
         Condition: () =>
         {
             return true;
@@ -29,7 +29,7 @@ public class Example : MonoBehaviour
         });
 
         _fsm.SetState("STATE 1"); // You need to select the first state
-        _fsm.Start(); // You need to start it at the end. Adding more states after starting is not recommended, but should work
+        _fsm.Start(Time.deltaTime); // You need to start it at the end with time delay execution, basically put Time.deltaTime or Time.unscaledDeltaTime
     }
 
 }
