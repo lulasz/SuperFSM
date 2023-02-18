@@ -64,6 +64,8 @@ namespace Lulasz.SuperFSM
         private State<T> _previousState;
         private State<T> _currentState;
 
+        public Action<State<T>, State<T>> onStateChanged;
+
         /// <summary>
         /// Creates new Finite State Machine
         /// </summary>
@@ -142,6 +144,13 @@ namespace Lulasz.SuperFSM
                                     // Reset
                                     entry = false;
                                     _currentState = _states.Find((x) => { return Compare(x.ID, transition.To); });
+
+                                    // Notify listeners
+                                    if (_previousState == null)
+                                        onStateChanged?.Invoke(new State<T>(default(T), null, null, null), _currentState);
+                                    else
+                                        onStateChanged?.Invoke(_previousState, _currentState);
+
                                     break;
                                 }
                             }

@@ -18,9 +18,13 @@ public class SuperFSMNPC : MonoBehaviour
     private float _waitTime;
     private Vector3 _destination;
 
+    private TextMesh _textMesh;
+
     private void Start()
     {
+        _textMesh = GetComponentInChildren<TextMesh>();
         _agent = gameObject.GetComponent<NavMeshAgent>();
+
 
         _fsm = new FSM<States>(this);
 
@@ -45,11 +49,12 @@ public class SuperFSMNPC : MonoBehaviour
 
         _fsm.SetState(States.Wait);
         _fsm.Start(Time.deltaTime);
-    }
 
-    private void Update()
-    {
-        gameObject.GetComponentInChildren<TextMesh>().text = _fsm.CurrentState.ID.ToString();
+        // Subscribe to changed state
+        _fsm.onStateChanged += (p, n) =>
+        {
+            _textMesh.text = $"{p.ID}->{n.ID}";
+        };
     }
 
     private bool DestinationReached()
