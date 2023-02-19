@@ -48,7 +48,7 @@ public class SuperFSMNPC : MonoBehaviour
         .AddTransition(to: States.Wait, () => DestinationReached());
 
         _fsm.SetState(States.Wait);
-        _fsm.Start(Time.deltaTime);
+        _fsm.Start(TimeScale.Scaled);
 
         // Subscribe to changed state
         _fsm.onStateChanged += (p, n) =>

@@ -25,7 +25,7 @@ public class SuperFSMExample : MonoBehaviour
         });
 
         _fsm.SetState("state 1");
-        _fsm.Start(Time.deltaTime);
+        _fsm.Start(TimeScale.Scaled);
     }
 
 }

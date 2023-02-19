@@ -5,6 +5,12 @@ using UnityEngine;
 
 namespace Lulasz.SuperFSM
 {
+    public enum TimeScale
+    {
+        Scaled,
+        Unscaled
+    }
+
     public class Transition<T> where T : IComparable
     {
         public T To;
@@ -89,9 +95,9 @@ namespace Lulasz.SuperFSM
 
         /// <summary>
         /// Starts the Finite State Machine
-        /// <param name="time">Delay to execute. Put here Time.deltaTime to execute like it would run on Update.</param>
+        /// <param name="scale">Delay to execute. Put here Time.deltaTime to execute like it would run on Update.</param>
         /// </summary>
-        public void Start(float time) => _mono.StartCoroutine(this.Execute(time));
+        public void Start(TimeScale scale) => _mono.StartCoroutine(this.Execute(scale));
 
         /// <summary>
         /// Stops the Finite State Machine
@@ -104,7 +110,7 @@ namespace Lulasz.SuperFSM
         /// <param name="id">Name of the state</param>
         public void SetState(T id) => _currentState = _states.Find((x) => { return Compare(x.ID, id); });
 
-        private IEnumerator Execute(float time)
+        private IEnumerator Execute(TimeScale scale)
         {
             if (_currentState == null)
                 throw new Exception($"{this} has no starting State set! Set using SetState('NAME') before Start()");
@@ -126,7 +132,10 @@ namespace Lulasz.SuperFSM
                     _currentState.OnUpdate?.Invoke();
 
                     // Wait for one frame to execute OnUpdate fully
-                    yield return new WaitForEndOfFrame();
+                    if (scale == TimeScale.Scaled)
+                        yield return new WaitForSeconds(Time.deltaTime);
+                    else
+                        yield return new WaitForSecondsRealtime(Time.unscaledDeltaTime);
 
                     // Check for open transition of current state
                     if (_currentState.Transitions != null && _currentState.Transitions.Count > 0)
@@ -163,7 +172,10 @@ namespace Lulasz.SuperFSM
                     }
                 }
 
-                yield return new WaitForSeconds((time <= 0f) ? Time.deltaTime : time);
+                if (scale == TimeScale.Scaled)
+                    yield return new WaitForSeconds(Time.deltaTime);
+                else
+                    yield return new WaitForSecondsRealtime(Time.unscaledDeltaTime);
             }
         }
 
